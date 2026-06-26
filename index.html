@@ -9,169 +9,202 @@
 <title>Fork It</title>
 <style>
 :root {
-  --bg: #0d0d1a;
-  --bg2: #1a1a2e;
-  --card: #1e1e35;
-  --border: #2a2a45;
-  --text: #f0f0ff;
-  --text2: #9090b8;
-  --accent: #ff6b35;
-  --accent2: #ff8c5a;
-  --gold: #ffd700;
-  --green: #51cf66;
-  --red: #ff6b6b;
-  --purple: #a29bfe;
-  --teal: #4ecdc4;
-  --font-display: 'Georgia', serif;
+  --bg:#0d0d1a;--bg2:#1a1a2e;--card:#1e1e35;--border:#2a2a45;
+  --text:#f0f0ff;--text2:#9090b8;--accent:#ff6b35;--gold:#ffd700;
+  --green:#51cf66;--red:#ff6b6b;--purple:#a29bfe;--teal:#4ecdc4;
+  --font-display:'Georgia',serif;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; overflow-x: hidden; }
-
-/* SCREENS */
-.screen { display: none; min-height: 100vh; }
-.screen.active { display: flex; flex-direction: column; }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;overflow-x:hidden;}
+.app{max-width:480px;margin:0 auto;position:relative;}
+.screen{display:none;min-height:100vh;flex-direction:column;}
+.screen.active{display:flex;}
 
 /* SPLASH */
-#screen-splash {
-  background: radial-gradient(ellipse at top, #2d1b4e 0%, #0d0d1a 70%);
-  align-items: center; justify-content: center; text-align: center; padding: 40px 24px;
-}
-.splash-fork { font-size: 80px; margin-bottom: 8px; animation: bounce 1.5s infinite alternate; }
-@keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-12px); } }
-.splash-title { font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--gold); letter-spacing: -1px; text-shadow: 0 0 40px rgba(255,215,0,0.4); }
-.splash-subtitle { font-size: 16px; color: var(--text2); margin: 8px 0 32px; }
-.host-intro { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 32px; max-width: 340px; }
-.host-avatar { font-size: 48px; margin-bottom: 8px; }
-.host-name { font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
-.host-quote { font-size: 14px; color: var(--text2); line-height: 1.5; font-style: italic; }
-.host-month { font-size: 11px; color: var(--text2); margin-top: 8px; opacity: 0.6; }
-.big-btn { width: 100%; max-width: 320px; padding: 18px; border-radius: 16px; border: none; font-size: 18px; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; transition: all 0.15s; }
-.big-btn:active { transform: scale(0.97); }
-.big-btn.primary { background: var(--accent); color: white; margin-bottom: 12px; }
-.big-btn.secondary { background: var(--card); border: 1.5px solid var(--border); color: var(--text2); }
+#screen-splash{background:radial-gradient(ellipse at top,#2d1b4e 0%,#0d0d1a 70%);align-items:center;justify-content:center;text-align:center;padding:40px 24px;}
+.splash-fork{font-size:80px;margin-bottom:8px;animation:bounce 1.5s infinite alternate;cursor:pointer;user-select:none;}
+@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-12px);}}
+.splash-title{font-family:var(--font-display);font-size:48px;font-weight:700;color:var(--gold);letter-spacing:-1px;text-shadow:0 0 40px rgba(255,215,0,0.4);}
+.splash-subtitle{font-size:16px;color:var(--text2);margin:8px 0 32px;}
+.host-intro{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:32px;max-width:340px;width:100%;}
+.host-avatar{font-size:48px;margin-bottom:8px;}
+.host-name{font-size:18px;font-weight:700;color:var(--gold);margin-bottom:6px;}
+.host-quote{font-size:14px;color:var(--text2);line-height:1.5;font-style:italic;}
+.host-session{font-size:11px;color:var(--text2);margin-top:8px;opacity:0.6;}
+.big-btn{width:100%;max-width:320px;padding:18px;border-radius:16px;border:none;font-size:18px;font-weight:700;cursor:pointer;transition:all 0.15s;margin-bottom:10px;}
+.big-btn:active{transform:scale(0.97);}
+.big-btn.primary{background:var(--accent);color:white;}
+.big-btn.secondary{background:var(--card);border:1.5px solid var(--border);color:var(--text2);}
 
 /* SETUP */
-#screen-setup { padding: 24px 20px; background: var(--bg); }
-.setup-header { text-align: center; margin-bottom: 28px; }
-.setup-title { font-family: var(--font-display); font-size: 28px; color: var(--gold); margin-bottom: 6px; }
-.setup-sub { font-size: 14px; color: var(--text2); }
-.setup-section { margin-bottom: 24px; }
-.setup-label { font-size: 12px; color: var(--text2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
-.code-display { background: var(--card); border: 2px solid var(--accent); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 16px; }
-.code-word { font-size: 42px; font-weight: 900; color: var(--gold); letter-spacing: 8px; font-family: var(--font-display); }
-.code-hint { font-size: 12px; color: var(--text2); margin-top: 6px; }
-.code-input { width: 100%; background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 16px; color: var(--text); font-size: 24px; font-weight: 700; text-align: center; letter-spacing: 6px; text-transform: uppercase; font-family: var(--font-display); }
-.code-input:focus { outline: none; border-color: var(--accent); }
-.player-btn { width: 100%; padding: 14px; border-radius: 14px; border: 2px solid var(--border); background: var(--card); color: var(--text2); font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 10px; transition: all 0.15s; }
-.player-btn.selected { border-color: var(--accent); color: var(--accent); background: rgba(255,107,53,0.1); }
+#screen-setup{padding:24px 20px 100px;background:var(--bg);}
+.setup-header{text-align:center;margin-bottom:28px;}
+.setup-title{font-family:var(--font-display);font-size:28px;color:var(--gold);margin-bottom:6px;}
+.setup-sub{font-size:14px;color:var(--text2);}
+.setup-label{font-size:12px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
+.player-btn{width:100%;padding:16px;border-radius:14px;border:2px solid var(--border);background:var(--card);color:var(--text2);font-size:16px;font-weight:600;cursor:pointer;margin-bottom:10px;transition:all 0.15s;display:flex;align-items:center;gap:12px;}
+.player-btn.selected{border-color:var(--accent);color:var(--accent);background:rgba(255,107,53,0.1);}
+.player-btn-avatar{font-size:28px;}
+.player-btn-info{text-align:left;}
+.player-btn-name{font-size:16px;font-weight:700;}
+.player-btn-sub{font-size:12px;color:var(--text2);margin-top:2px;}
+.code-display{background:var(--card);border:2px solid var(--accent);border-radius:16px;padding:20px;text-align:center;margin-bottom:16px;}
+.code-word{font-size:42px;font-weight:900;color:var(--gold);letter-spacing:8px;font-family:var(--font-display);}
+.code-hint{font-size:12px;color:var(--text2);margin-top:6px;}
+.code-input{width:100%;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:16px;color:var(--text);font-size:24px;font-weight:700;text-align:center;letter-spacing:6px;text-transform:uppercase;font-family:var(--font-display);}
+.code-input:focus{outline:none;border-color:var(--accent);}
+.go-btn{width:100%;padding:16px;border-radius:14px;border:none;font-size:16px;font-weight:700;background:var(--accent);color:white;cursor:pointer;margin-top:8px;}
+.go-btn:disabled{background:var(--border);color:var(--text2);cursor:not-allowed;}
+.go-btn:active:not(:disabled){transform:scale(0.97);}
 
-/* VIBE CHECK */
-#screen-vibe { padding: 24px 20px; background: var(--bg); }
-.round-header { text-align: center; margin-bottom: 24px; }
-.round-eyebrow { font-size: 11px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-.round-title { font-family: var(--font-display); font-size: 28px; color: var(--text); margin-bottom: 8px; }
-.host-bubble { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 16px 16px 16px; padding: 14px 16px; margin-bottom: 24px; font-size: 14px; color: var(--text2); line-height: 1.6; font-style: italic; }
-.vibe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-.vibe-btn { background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 16px 10px; text-align: center; cursor: pointer; transition: all 0.15s; }
-.vibe-btn:active { transform: scale(0.95); }
-.vibe-btn.selected { border-color: var(--accent); background: rgba(255,107,53,0.1); }
-.vibe-btn.selected .vibe-label { color: var(--accent); }
-.vibe-emoji { font-size: 32px; margin-bottom: 6px; }
-.vibe-label { font-size: 13px; font-weight: 600; color: var(--text2); }
-.go-btn { width: 100%; padding: 16px; border-radius: 14px; border: none; font-size: 16px; font-weight: 700; background: var(--accent); color: white; cursor: pointer; margin-top: 8px; }
-.go-btn:disabled { background: var(--border); color: var(--text2); cursor: not-allowed; }
-.go-btn:active:not(:disabled) { transform: scale(0.97); }
+/* VIBE */
+#screen-vibe{padding:24px 20px 100px;background:var(--bg);}
+.round-header{text-align:center;margin-bottom:24px;}
+.round-eyebrow{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.round-title{font-family:var(--font-display);font-size:28px;color:var(--text);margin-bottom:8px;}
+.host-bubble{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 16px 16px 16px;padding:14px 16px;margin-bottom:24px;font-size:14px;color:var(--text2);line-height:1.6;font-style:italic;}
+.vibe-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.vibe-btn{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:all 0.15s;}
+.vibe-btn:active{transform:scale(0.95);}
+.vibe-btn.selected{border-color:var(--accent);background:rgba(255,107,53,0.1);}
+.vibe-btn.selected .vibe-label{color:var(--accent);}
+.vibe-emoji{font-size:32px;margin-bottom:6px;}
+.vibe-label{font-size:13px;font-weight:600;color:var(--text2);}
 
 /* SPIN */
-#screen-spin { padding: 24px 20px; background: var(--bg); }
-.cuisine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-.cuisine-card { background: var(--card); border: 2px solid var(--border); border-radius: 14px; padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.15s; position: relative; }
-.cuisine-card:active { transform: scale(0.95); }
-.cuisine-card.first { border-color: var(--gold); background: rgba(255,215,0,0.1); }
-.cuisine-card.second { border-color: var(--purple); background: rgba(162,155,254,0.1); }
-.cuisine-emoji { font-size: 36px; margin-bottom: 6px; }
-.cuisine-name { font-size: 13px; font-weight: 600; color: var(--text2); }
-.cuisine-card.first .cuisine-name { color: var(--gold); }
-.cuisine-card.second .cuisine-name { color: var(--purple); }
-.pick-badge { position: absolute; top: -8px; right: -8px; width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-.pick-badge.first { background: var(--gold); color: #000; }
-.pick-badge.second { background: var(--purple); color: white; }
-.pick-legend { display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
-.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+#screen-spin{padding:24px 20px 100px;background:var(--bg);}
+.cuisine-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.cuisine-card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px 10px;text-align:center;cursor:pointer;transition:all 0.15s;position:relative;}
+.cuisine-card:active{transform:scale(0.95);}
+.cuisine-card.pick1{border-color:var(--gold);background:rgba(255,215,0,0.1);}
+.cuisine-card.pick2{border-color:var(--purple);background:rgba(162,155,254,0.1);}
+.cuisine-card.pick3{border-color:var(--teal);background:rgba(78,205,196,0.1);}
+.cuisine-card.pick1 .cuisine-name{color:var(--gold);}
+.cuisine-card.pick2 .cuisine-name{color:var(--purple);}
+.cuisine-card.pick3 .cuisine-name{color:var(--teal);}
+.cuisine-emoji{font-size:36px;margin-bottom:6px;}
+.cuisine-name{font-size:13px;font-weight:600;color:var(--text2);}
+.pick-badge{position:absolute;top:-8px;right:-8px;width:24px;height:24px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.pick-badge.b1{background:var(--gold);color:#000;}
+.pick-badge.b2{background:var(--purple);color:white;}
+.pick-badge.b3{background:var(--teal);color:#000;}
+.pick-legend{display:flex;gap:12px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);}
+.legend-dot{width:10px;height:10px;border-radius:50%;}
 
 /* WAITING */
-#screen-waiting { align-items: center; justify-content: center; text-align: center; padding: 40px 24px;
-  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0d0d1a 100%); }
-.waiting-emoji { font-size: 64px; margin-bottom: 16px; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-.waiting-title { font-family: var(--font-display); font-size: 28px; color: var(--gold); margin-bottom: 10px; }
-.waiting-sub { font-size: 15px; color: var(--text2); line-height: 1.6; margin-bottom: 24px; }
-.waiting-code { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 24px; display: inline-block; }
-.waiting-code-label { font-size: 11px; color: var(--text2); margin-bottom: 4px; }
-.waiting-code-word { font-size: 32px; font-weight: 900; color: var(--gold); letter-spacing: 6px; }
+#screen-waiting{align-items:center;justify-content:center;text-align:center;padding:40px 24px;background:radial-gradient(ellipse at center,#1a1a2e 0%,#0d0d1a 100%);}
+.waiting-emoji{font-size:64px;margin-bottom:16px;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.waiting-title{font-family:var(--font-display);font-size:28px;color:var(--gold);margin-bottom:10px;}
+.waiting-sub{font-size:15px;color:var(--text2);line-height:1.6;margin-bottom:24px;}
+.waiting-code{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 24px;display:inline-block;}
+.waiting-code-label{font-size:11px;color:var(--text2);margin-bottom:4px;}
+.waiting-code-word{font-size:32px;font-weight:900;color:var(--gold);letter-spacing:6px;}
+.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:20px auto;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
 /* REVEAL */
-#screen-reveal { padding: 24px 20px; background: radial-gradient(ellipse at top, #2d1b4e 0%, #0d0d1a 70%); }
-.reveal-countdown { text-align: center; padding: 40px 0; }
-.reveal-number { font-size: 120px; font-weight: 900; color: var(--gold); font-family: var(--font-display); animation: countPop 0.5s ease-out; }
-@keyframes countPop { from { transform: scale(2); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.reveal-result { text-align: center; }
-.reveal-trophy { font-size: 64px; margin-bottom: 12px; }
-.reveal-winner { font-family: var(--font-display); font-size: 36px; font-weight: 700; color: var(--gold); margin-bottom: 8px; text-shadow: 0 0 30px rgba(255,215,0,0.5); }
-.reveal-restaurant { font-size: 22px; color: var(--text); margin-bottom: 16px; }
-.reveal-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-.reveal-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; }
-.reveal-card-label { font-size: 11px; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-.reveal-card-first { font-size: 15px; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
-.reveal-card-second { font-size: 13px; color: var(--purple); }
-.match-type { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 16px; }
-.match-type.perfect { background: rgba(81,207,102,0.2); color: var(--green); border: 1px solid var(--green); }
-.match-type.compromise { background: rgba(162,155,254,0.2); color: var(--purple); border: 1px solid var(--purple); }
-.match-type.chaos { background: rgba(255,107,107,0.2); color: var(--red); border: 1px solid var(--red); }
-.confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
-.confetti-piece { position: absolute; width: 10px; height: 10px; top: -10px; animation: confettiFall linear forwards; border-radius: 2px; }
-@keyframes confettiFall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
-.rating-section { margin-top: 20px; }
-.rating-title { font-size: 14px; color: var(--text2); text-align: center; margin-bottom: 12px; }
-.rating-btns { display: flex; gap: 12px; }
-.rating-btn { flex: 1; padding: 14px; border-radius: 14px; border: 2px solid var(--border); background: var(--card); font-size: 24px; cursor: pointer; text-align: center; transition: all 0.15s; }
-.rating-btn:active { transform: scale(0.95); }
-.rating-btn.thumbsup { border-color: var(--green); }
-.rating-btn.thumbsdown { border-color: var(--red); }
+#screen-reveal{padding:24px 20px 100px;background:radial-gradient(ellipse at top,#2d1b4e 0%,#0d0d1a 70%);}
+.reveal-countdown{text-align:center;padding:60px 0;}
+.reveal-number{font-size:120px;font-weight:900;color:var(--gold);font-family:var(--font-display);animation:countPop 0.5s ease-out;}
+@keyframes countPop{from{transform:scale(2);opacity:0;}to{transform:scale(1);opacity:1;}}
+.reveal-result{text-align:center;}
+.reveal-trophy{font-size:64px;margin-bottom:12px;}
+.reveal-winner{font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--gold);margin-bottom:8px;text-shadow:0 0 30px rgba(255,215,0,0.5);}
+.reveal-note{font-size:15px;color:var(--text2);margin-bottom:16px;}
+.reveal-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.reveal-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center;}
+.reveal-card-avatar{font-size:28px;margin-bottom:4px;}
+.reveal-card-alias{font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.reveal-card-pick{font-size:13px;color:var(--gold);margin-bottom:3px;font-weight:600;}
+.reveal-card-pick2{font-size:12px;color:var(--purple);}
+.reveal-card-pick3{font-size:12px;color:var(--teal);}
+.match-badge{display:inline-block;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:16px;}
+.match-badge.perfect{background:rgba(81,207,102,0.2);color:var(--green);border:1px solid var(--green);}
+.match-badge.compromise{background:rgba(162,155,254,0.2);color:var(--purple);border:1px solid var(--purple);}
+.match-badge.chaos{background:rgba(255,107,107,0.2);color:var(--red);border:1px solid var(--red);}
+.rating-section{margin-top:20px;}
+.rating-title{font-size:14px;color:var(--text2);text-align:center;margin-bottom:12px;}
+.rating-btns{display:flex;gap:12px;}
+.rating-btn{flex:1;padding:14px;border-radius:14px;border:2px solid var(--border);background:var(--card);font-size:24px;cursor:pointer;text-align:center;transition:all 0.15s;}
+.rating-btn.up{border-color:var(--green);}
+.rating-btn.down{border-color:var(--red);}
+.confetti-container{position:fixed;inset:0;pointer-events:none;z-index:999;}
+.confetti-piece{position:absolute;width:10px;height:10px;top:-10px;animation:confettiFall linear forwards;border-radius:2px;}
+@keyframes confettiFall{to{transform:translateY(110vh) rotate(720deg);opacity:0;}}
 
 /* HISTORY */
-#screen-history { padding: 20px 16px 80px; background: var(--bg); }
-.history-header { font-family: var(--font-display); font-size: 24px; color: var(--gold); margin-bottom: 16px; }
-.history-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 10px; }
-.history-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
-.history-winner { font-size: 16px; font-weight: 700; color: var(--text); }
-.history-rating { font-size: 20px; }
-.history-meta { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
-.history-picks { display: flex; gap: 8px; flex-wrap: wrap; }
-.history-badge { font-size: 11px; padding: 3px 10px; border-radius: 10px; background: var(--bg2); color: var(--text2); }
-.empty-state { text-align: center; padding: 60px 20px; color: var(--text2); }
-.empty-icon { font-size: 48px; margin-bottom: 12px; }
+#screen-history{padding:20px 16px 80px;background:var(--bg);}
+.history-header{font-family:var(--font-display);font-size:24px;color:var(--gold);margin-bottom:16px;}
+.history-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;}
+.history-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+.history-winner{font-size:16px;font-weight:700;color:var(--text);}
+.history-rating{font-size:20px;}
+.history-meta{font-size:12px;color:var(--text2);margin-bottom:6px;}
+.history-picks{display:flex;gap:8px;flex-wrap:wrap;}
+.history-badge{font-size:11px;padding:3px 10px;border-radius:10px;background:var(--bg2);color:var(--text2);}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text2);}
+.empty-icon{font-size:48px;margin-bottom:12px;}
 
-/* BOTTOM NAV */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg2); border-top: 1px solid var(--border); display: flex; z-index: 100; max-width: 480px; margin: 0 auto; }
-.nav-btn { flex: 1; padding: 10px 4px 14px; background: none; border: none; color: var(--text2); font-size: 11px; font-weight: 500; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; }
-.nav-btn svg { width: 20px; height: 20px; }
-.nav-btn.active { color: var(--accent); }
+/* ADMIN */
+#screen-admin{padding:20px 16px 100px;background:var(--bg);}
+.admin-header{font-family:var(--font-display);font-size:24px;color:var(--gold);margin-bottom:6px;}
+.admin-sub{font-size:13px;color:var(--text2);margin-bottom:20px;}
+.admin-section{margin-bottom:24px;}
+.admin-section-title{font-size:12px;color:var(--text2);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.admin-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;}
+.admin-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.admin-row:last-child{margin-bottom:0;}
+.admin-label{font-size:13px;color:var(--text2);min-width:80px;}
+.admin-input{flex:1;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-size:14px;font-family:inherit;}
+.admin-input:focus{outline:none;border-color:var(--accent);}
+.admin-emoji-input{width:64px;font-size:24px;text-align:center;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:8px;color:var(--text);}
+.admin-emoji-input:focus{outline:none;border-color:var(--accent);}
+.pick-count-row{display:flex;gap:10px;}
+.pick-count-btn{flex:1;padding:12px;border-radius:12px;border:2px solid var(--border);background:var(--card);color:var(--text2);font-size:16px;font-weight:700;cursor:pointer;text-align:center;transition:all 0.15s;}
+.pick-count-btn.selected{border-color:var(--accent);color:var(--accent);background:rgba(255,107,53,0.1);}
+.host-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.host-select-btn{padding:12px 8px;border-radius:12px;border:2px solid var(--border);background:var(--card);color:var(--text2);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:all 0.15s;}
+.host-select-btn .host-emoji{font-size:24px;display:block;margin-bottom:4px;}
+.host-select-btn.selected{border-color:var(--gold);color:var(--gold);background:rgba(255,215,0,0.1);}
+.host-select-btn.auto{border-color:var(--accent);color:var(--accent);background:rgba(255,107,53,0.1);}
+.food-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+.food-item-left{display:flex;align-items:center;gap:8px;}
+.food-item-emoji{font-size:20px;}
+.food-item-info{}
+.food-item-name{font-size:13px;font-weight:600;color:var(--text);}
+.food-item-flags{font-size:11px;color:var(--text2);}
+.food-item-del{background:none;border:none;color:var(--red);font-size:18px;cursor:pointer;padding:4px 8px;}
+.add-btn{background:var(--accent);border:none;border-radius:8px;padding:6px 14px;color:white;font-size:12px;font-weight:700;cursor:pointer;}
+.seed-btn{width:100%;padding:14px;border-radius:14px;border:1.5px solid var(--border);font-size:14px;font-weight:700;background:var(--card);color:var(--text2);cursor:pointer;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.save-btn{width:100%;padding:16px;border-radius:14px;border:none;font-size:16px;font-weight:700;background:var(--green);color:white;cursor:pointer;}
 
-/* STATUS BAR */
-.status-bar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; }
-.status-host { font-size: 12px; color: var(--text2); }
-.status-session { font-size: 12px; color: var(--accent); font-weight: 600; }
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:20px;width:100%;max-width:380px;}
+.modal-title{font-size:16px;font-weight:700;margin-bottom:14px;color:var(--gold);}
+.modal-input{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--text);font-size:14px;font-family:inherit;margin-bottom:10px;}
+.modal-input:focus{outline:none;border-color:var(--accent);}
+.modal-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.modal-row-label{font-size:13px;color:var(--text2);}
+.toggle{width:44px;height:26px;background:var(--border);border-radius:13px;position:relative;cursor:pointer;transition:background 0.2s;flex-shrink:0;}
+.toggle.on{background:var(--accent);}
+.toggle-thumb{width:20px;height:20px;background:white;border-radius:50%;position:absolute;top:3px;left:3px;transition:transform 0.2s;}
+.toggle.on .toggle-thumb{transform:translateX(18px);}
+.modal-select{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--text);font-size:14px;font-family:inherit;margin-bottom:10px;}
+.modal-select:focus{outline:none;border-color:var(--accent);}
+.modal-actions{display:flex;gap:10px;margin-top:4px;}
+.modal-btn{flex:1;padding:12px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;}
+.modal-btn.cancel{background:var(--card);color:var(--text2);border:1px solid var(--border);}
+.modal-btn.confirm{background:var(--accent);color:white;}
 
-/* MISC */
-.section-divider { height: 1px; background: var(--border); margin: 20px 0; }
-.toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 20px; font-size: 14px; color: var(--text); z-index: 200; white-space: nowrap; animation: toastIn 0.3s ease; }
-@keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-.spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 20px auto; }
-@keyframes spin { to { transform: rotate(360deg); } }
+/* SECRET HINT */
+.secret-hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 18px;font-size:13px;color:var(--text2);z-index:200;animation:toastIn 0.3s ease,fadeOut 0.5s ease 2s forwards;}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+@keyframes fadeOut{to{opacity:0;}}
 
-.app { max-width: 480px; margin: 0 auto; position: relative; }
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 20px;font-size:14px;color:var(--text);z-index:200;white-space:nowrap;animation:toastIn 0.3s ease;}
 </style>
 </head>
 <body>
@@ -179,14 +212,14 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, Bl
 
 <!-- SPLASH -->
 <div class="screen active" id="screen-splash">
-  <div class="splash-fork">🍴</div>
+  <div class="splash-fork" id="splash-fork" ontouchstart="startLongPress()" ontouchend="cancelLongPress()" onmousedown="startLongPress()" onmouseup="cancelLongPress()">🍴</div>
   <div class="splash-title">Fork It</div>
   <div class="splash-subtitle">The dinner decision game show</div>
   <div class="host-intro">
     <div class="host-avatar" id="host-avatar"></div>
     <div class="host-name" id="host-name"></div>
     <div class="host-quote" id="host-quote"></div>
-    <div class="host-month" id="host-month"></div>
+    <div class="host-session" id="host-session"></div>
   </div>
   <button class="big-btn primary" onclick="showScreen('setup')">🎲 Start Tonight's Round</button>
   <button class="big-btn secondary" onclick="showScreen('history')">📋 Past Decisions</button>
@@ -199,10 +232,22 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, Bl
       <div class="setup-title">Fork It</div>
       <div class="setup-sub" id="setup-host-line"></div>
     </div>
-    <div class="setup-section">
-      <div class="setup-label">Who are you?</div>
-      <button class="player-btn" id="p1btn" onclick="selectPlayer(1)">🧔 Player 1 — Starting the session</button>
-      <button class="player-btn" id="p2btn" onclick="selectPlayer(2)">👩 Player 2 — Joining a session</button>
+    <div style="margin-bottom:20px;">
+      <div class="setup-label">Who are you tonight?</div>
+      <button class="player-btn" id="p1btn" onclick="selectPlayer(1)">
+        <div class="player-btn-avatar" id="p1-avatar-btn">🧔</div>
+        <div class="player-btn-info">
+          <div class="player-btn-name" id="p1-name-btn">Player 1</div>
+          <div class="player-btn-sub">Starting the session</div>
+        </div>
+      </button>
+      <button class="player-btn" id="p2btn" onclick="selectPlayer(2)">
+        <div class="player-btn-avatar" id="p2-avatar-btn">👸</div>
+        <div class="player-btn-info">
+          <div class="player-btn-name" id="p2-name-btn">Player 2</div>
+          <div class="player-btn-sub">Joining a session</div>
+        </div>
+      </button>
     </div>
     <div id="p1-section" style="display:none;">
       <div class="setup-label">Your session code — share this!</div>
@@ -214,13 +259,13 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, Bl
     </div>
     <div id="p2-section" style="display:none;">
       <div class="setup-label">Enter the session code</div>
-      <input class="code-input" id="code-input" maxlength="4" placeholder="TACO" oninput="this.value=this.value.toUpperCase()" />
+      <input class="code-input" id="code-input" maxlength="4" placeholder="TACO" oninput="this.value=this.value.toUpperCase()"/>
       <button class="go-btn" style="margin-top:12px;" onclick="joinAsP2()">Join Session 🎬</button>
     </div>
   </div>
 </div>
 
-<!-- VIBE CHECK -->
+<!-- VIBE -->
 <div class="screen" id="screen-vibe">
   <div style="padding:24px 20px 100px;">
     <div class="round-header">
@@ -230,33 +275,15 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, Bl
     <div class="host-bubble" id="vibe-host-line"></div>
     <div class="setup-label">Energy level tonight?</div>
     <div class="vibe-grid" id="energy-grid">
-      <div class="vibe-btn" onclick="selectEnergy('dead')">
-        <div class="vibe-emoji">💀</div>
-        <div class="vibe-label">Dead tired</div>
-      </div>
-      <div class="vibe-btn" onclick="selectEnergy('low')">
-        <div class="vibe-emoji">😴</div>
-        <div class="vibe-label">Pretty low</div>
-      </div>
-      <div class="vibe-btn" onclick="selectEnergy('ok')">
-        <div class="vibe-emoji">😐</div>
-        <div class="vibe-label">I'm okay</div>
-      </div>
-      <div class="vibe-btn" onclick="selectEnergy('good')">
-        <div class="vibe-emoji">🤙</div>
-        <div class="vibe-label">Feeling good</div>
-      </div>
+      <div class="vibe-btn" onclick="selectVibe('energy','dead',this)"><div class="vibe-emoji">💀</div><div class="vibe-label">Dead tired</div></div>
+      <div class="vibe-btn" onclick="selectVibe('energy','low',this)"><div class="vibe-emoji">😴</div><div class="vibe-label">Pretty low</div></div>
+      <div class="vibe-btn" onclick="selectVibe('energy','ok',this)"><div class="vibe-emoji">😐</div><div class="vibe-label">I'm okay</div></div>
+      <div class="vibe-btn" onclick="selectVibe('energy','good',this)"><div class="vibe-emoji">🤙</div><div class="vibe-label">Feeling good</div></div>
     </div>
     <div class="setup-label">Go out or stay in?</div>
     <div class="vibe-grid" id="goout-grid">
-      <div class="vibe-btn" onclick="selectGoOut('out')">
-        <div class="vibe-emoji">🚗</div>
-        <div class="vibe-label">Let's go out</div>
-      </div>
-      <div class="vibe-btn" onclick="selectGoOut('in')">
-        <div class="vibe-emoji">🏠</div>
-        <div class="vibe-label">Stay home</div>
-      </div>
+      <div class="vibe-btn" onclick="selectVibe('goout','out',this)"><div class="vibe-emoji">🚗</div><div class="vibe-label">Let's go out</div></div>
+      <div class="vibe-btn" onclick="selectVibe('goout','in',this)"><div class="vibe-emoji">🏠</div><div class="vibe-label">Stay home</div></div>
     </div>
     <button class="go-btn" id="vibe-next-btn" disabled onclick="submitVibe()">Next Round →</button>
   </div>
@@ -270,10 +297,7 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, Bl
       <div class="round-title" id="spin-title">The Spin</div>
     </div>
     <div class="host-bubble" id="spin-host-line"></div>
-    <div class="pick-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>1st choice</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>2nd choice</div>
-    </div>
+    <div class="pick-legend" id="pick-legend"></div>
     <div class="cuisine-grid" id="cuisine-grid"></div>
     <button class="go-btn" id="spin-next-btn" disabled onclick="submitSpin()">Lock In My Picks 🔒</button>
   </div>
@@ -283,12 +307,12 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, Bl
 <div class="screen" id="screen-waiting">
   <div class="waiting-emoji">⏳</div>
   <div class="waiting-title">Picks locked in!</div>
-  <div class="waiting-sub" id="waiting-sub">Your picks are saved and encrypted.<br>Waiting for the other player to submit...</div>
+  <div class="waiting-sub" id="waiting-sub">Encrypted and saved.<br>Waiting for the other player...</div>
   <div class="waiting-code">
     <div class="waiting-code-label">Session code</div>
     <div class="waiting-code-word" id="waiting-code-display"></div>
   </div>
-  <div class="spinner" id="waiting-spinner" style="margin-top:24px;"></div>
+  <div class="spinner" id="waiting-spinner"></div>
   <button class="go-btn" id="reveal-now-btn" style="display:none;max-width:280px;margin-top:20px;" onclick="showReveal()">🎬 See The Reveal!</button>
 </div>
 
@@ -300,16 +324,16 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, Bl
     </div>
     <div id="reveal-result-div" class="reveal-result" style="display:none;">
       <div class="reveal-trophy" id="reveal-trophy"></div>
-      <div class="match-type" id="match-type-badge"></div>
-      <div class="reveal-winner" id="reveal-winner-text"></div>
-      <div class="reveal-restaurant" id="reveal-restaurant-text"></div>
+      <div class="match-badge" id="match-badge"></div>
+      <div class="reveal-winner" id="reveal-winner"></div>
+      <div class="reveal-note" id="reveal-note"></div>
       <div class="host-bubble" id="reveal-host-line" style="text-align:left;"></div>
       <div class="reveal-cards" id="reveal-cards"></div>
       <div class="rating-section">
         <div class="rating-title" id="rating-title">After you eat — how was it?</div>
         <div class="rating-btns">
-          <button class="rating-btn thumbsup" onclick="rate('up')">👍</button>
-          <button class="rating-btn thumbsdown" onclick="rate('down')">👎</button>
+          <button class="rating-btn up" onclick="rate('up')">👍</button>
+          <button class="rating-btn down" onclick="rate('down')">👎</button>
         </div>
       </div>
       <button class="go-btn" style="margin-top:16px;" onclick="showScreen('splash')">Back to Home 🏠</button>
@@ -321,542 +345,762 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, Bl
 <!-- HISTORY -->
 <div class="screen" id="screen-history">
   <div style="padding:20px 16px 100px;">
-    <div class="history-header">Past Decisions 📋</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div class="history-header" style="margin-bottom:0;">Past Decisions 📋</div>
+      <button class="go-btn" style="width:auto;padding:8px 16px;margin:0;font-size:13px;" onclick="showScreen('splash')">← Home</button>
+    </div>
     <div id="history-list"></div>
   </div>
 </div>
 
-</div><!-- end .app -->
+<!-- ADMIN -->
+<div class="screen" id="screen-admin">
+  <div style="padding:20px 16px 100px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <div class="admin-header">⚙️ Admin</div>
+      <button class="go-btn" style="width:auto;padding:8px 16px;margin:0;font-size:13px;" onclick="saveAdmin()">Save ✓</button>
+    </div>
+    <div class="admin-sub">Secret settings. Long press the fork to get back here.</div>
 
+    <!-- PLAYERS -->
+    <div class="admin-section">
+      <div class="admin-section-title">Players</div>
+      <div class="admin-card">
+        <div class="admin-row">
+          <div class="admin-label">P1 Avatar</div>
+          <input class="admin-emoji-input" id="p1-avatar" maxlength="2" placeholder="🧔"/>
+          <div class="admin-label" style="margin-left:8px;">Alias</div>
+          <input class="admin-input" id="p1-alias" placeholder="Chris"/>
+        </div>
+        <div class="admin-row">
+          <div class="admin-label">P2 Avatar</div>
+          <input class="admin-emoji-input" id="p2-avatar" maxlength="2" placeholder="👸"/>
+          <div class="admin-label" style="margin-left:8px;">Alias</div>
+          <input class="admin-input" id="p2-alias" placeholder="Diana"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME SETTINGS -->
+    <div class="admin-section">
+      <div class="admin-section-title">Game Settings</div>
+      <div class="admin-card">
+        <div class="setup-label" style="margin-bottom:8px;">Picks per player</div>
+        <div class="pick-count-row">
+          <div class="pick-count-btn" id="pick2btn" onclick="selectPickCount(2)">2 Picks</div>
+          <div class="pick-count-btn" id="pick3btn" onclick="selectPickCount(3)">3 Picks</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOST -->
+    <div class="admin-section">
+      <div class="admin-section-title">Tonight's Host</div>
+      <div class="admin-card">
+        <div class="host-grid" id="host-select-grid"></div>
+      </div>
+    </div>
+
+    <!-- FOOD -->
+    <div class="admin-section">
+      <div class="admin-section-title">
+        Food Options
+        <button class="add-btn" onclick="showAddFood()">+ Add</button>
+      </div>
+      <button class="seed-btn" onclick="seedFoodDefaults()">🌱 Restore Missing Defaults</button>
+      <div id="food-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD FOOD MODAL -->
+<div class="modal-overlay" id="food-modal" style="display:none;">
+  <div class="modal">
+    <div class="modal-title">Add Food Option</div>
+    <input class="modal-input" id="food-name-input" placeholder="Name (e.g. Roscoe's)"/>
+    <div style="display:flex;gap:10px;margin-bottom:10px;">
+      <input class="modal-input" id="food-emoji-input" placeholder="🍗" maxlength="2" style="width:70px;text-align:center;font-size:20px;flex-shrink:0;"/>
+      <select class="modal-select" id="food-bucket-input" style="margin-bottom:0;">
+        <option value="out">Eating Out</option>
+        <option value="in">Home</option>
+      </select>
+    </div>
+    <div class="modal-row">
+      <div class="modal-row-label">Weekend only</div>
+      <div class="toggle" id="food-weekend-toggle" onclick="toggleFoodFlag('weekend')"><div class="toggle-thumb"></div></div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-row-label">Winter only</div>
+      <div class="toggle" id="food-winter-toggle" onclick="toggleFoodFlag('winter')"><div class="toggle-thumb"></div></div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeFoodModal()">Cancel</button>
+      <button class="modal-btn confirm" onclick="confirmAddFood()">Add</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .app -->
 <script>
-// ─── CONFIG ───────────────────────────────────────────────────────────────
-const SUPABASE_URL = 'https://zapxlsijwjpkrdycrvax.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphcHhsc2lqd2pwa3JkeWNydmF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwOTQzMzAsImV4cCI6MjA5NzY3MDMzMH0.wAVKdDNLx8u3QfA4NncXl84NkJLx477QoB_Hy7w8AiM';
+// ─── SUPABASE ─────────────────────────────────────────────────────────────
+const SB_URL='https://zapxlsijwjpkrdycrvax.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphcHhsc2lqd2pwa3JkeWNydmF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwOTQzMzAsImV4cCI6MjA5NzY3MDMzMH0.wAVKdDNLx8u3QfA4NncXl84NkJLx477QoB_Hy7w8AiM';
 
 // ─── HOSTS ────────────────────────────────────────────────────────────────
-const HOSTS = {
-  1:  { name: 'The Dude', avatar: '🥛', vibe: 'dude' },
-  2:  { name: 'Austin Powers', avatar: '🕺', vibe: 'austin' },
-  3:  { name: 'Han Solo', avatar: '🚀', vibe: 'han' },
-  4:  { name: 'Samuel L. Jackson', avatar: '😤', vibe: 'sam' },
-  5:  { name: 'The Dude', avatar: '🥛', vibe: 'dude' },
-  6:  { name: 'Han Solo', avatar: '🚀', vibe: 'han' },
-  7:  { name: 'Austin Powers', avatar: '🕺', vibe: 'austin' },
-  8:  { name: 'Samuel L. Jackson', avatar: '😤', vibe: 'sam' },
-  9:  { name: 'Han Solo', avatar: '🚀', vibe: 'han' },
-  10: { name: 'Samuel L. Jackson', avatar: '😤', vibe: 'sam' },
-  11: { name: 'The Dude', avatar: '🥛', vibe: 'dude' },
-  12: { name: 'Austin Powers', avatar: '🕺', vibe: 'austin' },
-};
+const ALL_HOSTS=[
+  {id:'dude', name:'The Dude', avatar:'🥛'},
+  {id:'austin', name:'Austin Powers', avatar:'🕺'},
+  {id:'han', name:'Han Solo', avatar:'🚀'},
+  {id:'sam', name:'Samuel L. Jackson', avatar:'😤'},
+];
 
-const HOST_LINES = {
-  dude: {
-    splash: "Hey man... it's dinner time again. The fridge is not the answer. Let's just, you know, figure this out. Abide.",
-    vibe: "First things first, man. How's everybody feeling? No judgment here. The Dude just needs to know.",
-    spin_weekday: "Alright. It's a weekday. Nothing too heavy man. Let's keep it chill.",
-    spin_weekend: "Weekend vibes man. The world is your taco. Or your burger. Whatever.",
-    spin_home: "Sometimes the couch calls, man. And you answer. No shame in that.",
-    perfect: "Whoa. You two actually agreed on something. That's like... cosmic, man.",
-    compromise: "Second choice wins. That's the universe working in mysterious ways, man.",
-    chaos: "You two were in completely different places tonight. That's cool too man. The important thing is you're eating.",
-    dominos: "Domino's. Look man, the pizza abides. Put on a movie, pour something, it's all good.",
-    triTip: "Smoked tri-tip? On this day? Somebody's been planning. Far out.",
-    roscoes_weekday: "Roscoe's on a weekday man... that's a bold choice. Real bold.",
-    thumbsUp: "Right on. The universe provided, man.",
-    thumbsDown: "That's a bummer man. A real bummer. We'll do better next time.",
+const HOST_LINES={
+  dude:{
+    splash:"Hey man... it's dinner time again. The fridge is not the answer. Let's just, you know, figure this out. Abide.",
+    vibe:"First things first, man. How's everybody feeling? No judgment here.",
+    spin_out_weekday:"Alright. It's a weekday. Nothing too heavy man. Let's keep it chill.",
+    spin_out_weekend:"Weekend vibes man. The world is your taco. Or your burger. Whatever.",
+    spin_in:"Sometimes the couch calls, man. And you answer. No shame in that.",
+    perfect:(p1,p2)=>`Whoa. ${p1} and ${p2} actually agreed on something. That's like... cosmic, man. 🌌`,
+    compromise:(p1,p2)=>`Second choice takes it. That's the universe working in mysterious ways, man.`,
+    chaos:(p1,p2)=>`${p1} and ${p2} were in completely different places tonight. That's cool too man. The important thing is you're eating.`,
+    dominos:"The pizza abides. Put on a movie, pour something. It's all good man.",
+    tritip:"Smoked tri-tip? On this day? Somebody's been planning. Far out.",
+    roscoes_weekday:"Roscoe's on a weekday man... that's a bold choice. Real bold.",
+    thumbsUp:"Right on. The universe provided, man.",
+    thumbsDown:"That's a bummer man. A real bummer. We'll do better next time.",
   },
-  austin: {
-    splash: "Oh BEHAVE! It's dinner time baby and Fork It is HERE to save the evening! YEAH BABY YEAH!",
-    vibe: "Right then! Before we get this groovy train moving — how are we feeling tonight, baby?",
-    spin_weekday: "It's a weeknight baby! Keep it snappy, keep it groovy, keep it... SHAGADELIC!",
-    spin_weekend: "It's the WEEKEND baby! Time to get FANCY! The world is our oyster! Or taco! YEAH!",
-    spin_home: "Staying in baby? Oh BEHAVE — that can be very groovy indeed!",
-    perfect: "Oh SNAP! You two agreed! Someone mark the calendar! This is WELL FIT baby! YEAH BABY YEAH!",
-    compromise: "Not quite a perfect match but we're making it WORK baby! That's the spirit!",
-    chaos: "Oh no no no no no. You two were in completely different UNIVERSES tonight baby. But we shall persevere!",
-    dominos: "Domino's? On this magical evening? I shall try to remain... groovy about this.",
-    triTip: "Smoked TRI-TIP?! Oh BEHAVE! Somebody's been planning ahead! That is WELL FIT!",
-    roscoes_weekday: "Roscoe's on a TUESDAY?! Bold move baby! Chicken AND waffles?! Oh BEHAVE!",
-    thumbsUp: "YEAH BABY YEAH! That's what I'm TALKING about! Shagadelic!",
-    thumbsDown: "Oh that is SO not groovy baby. SO not groovy. We'll do better!",
+  austin:{
+    splash:"Oh BEHAVE! It's dinner time baby and Fork It is HERE to save the evening! YEAH BABY YEAH!",
+    vibe:"Right then! Before we get this groovy train moving — how are we feeling tonight, baby?",
+    spin_out_weekday:"It's a weeknight baby! Keep it snappy, keep it groovy — SHAGADELIC!",
+    spin_out_weekend:"It's the WEEKEND baby! Time to get FANCY! YEAH BABY YEAH!",
+    spin_in:"Staying in baby? Oh BEHAVE — that can be very groovy indeed!",
+    perfect:(p1,p2)=>`Oh SNAP! ${p1} and ${p2} agreed! Someone mark the calendar! This is WELL FIT baby! YEAH!`,
+    compromise:(p1,p2)=>`Not a perfect match but we're making it WORK baby! That's the spirit!`,
+    chaos:(p1,p2)=>`Oh no no no. ${p1} and ${p2} were in completely different UNIVERSES tonight baby!`,
+    dominos:"Domino's? On this magical evening? I shall try to remain... groovy about this.",
+    tritip:"Smoked TRI-TIP?! Oh BEHAVE! Somebody's been planning ahead! WELL FIT!",
+    roscoes_weekday:"Roscoe's on a TUESDAY?! Bold move baby! Chicken AND waffles?! Oh BEHAVE!",
+    thumbsUp:"YEAH BABY YEAH! That's what I'm TALKING about! Shagadelic!",
+    thumbsDown:"Oh that is SO not groovy baby. SO not groovy. We'll do better!",
   },
-  han: {
-    splash: "I've got a bad feeling about this. Another dinner decision. Let's get it over with.",
-    vibe: "Alright. Let's not overthink this. Energy check first. Quick.",
-    spin_weekday: "It's a weeknight. Keep it simple. Nobody needs a mission here.",
-    spin_weekend: "Weekend. More options. Don't blow it.",
-    spin_home: "Staying in. Sometimes that's just the smart move. No drama.",
-    perfect: "Well. You actually agreed on something. Never tell me the odds.",
-    compromise: "Second choice wins. Could be worse. I've seen worse.",
-    chaos: "You two picked completely different things. I had a bad feeling about this.",
-    dominos: "Domino's. On a night like this. I've made the Kessel Run in less than twelve parsecs and THIS is what we're doing.",
-    triTip: "Smoked tri-tip. Someone actually planned ahead. Respect.",
-    roscoes_weekday: "Roscoe's. Tuesday. I don't know. I have a bad feeling about this.",
-    thumbsUp: "Good call. Sometimes things work out.",
-    thumbsDown: "Bad feeling about that place from the start. Next time, trust me.",
+  han:{
+    splash:"I've got a bad feeling about this. Another dinner decision. Let's get it over with.",
+    vibe:"Alright. Let's not overthink this. Energy check first. Quick.",
+    spin_out_weekday:"It's a weeknight. Keep it simple. Nobody needs a mission here.",
+    spin_out_weekend:"Weekend. More options. Don't blow it.",
+    spin_in:"Staying in. Sometimes that's just the smart move. No drama.",
+    perfect:(p1,p2)=>`Well. ${p1} and ${p2} actually agreed on something. Never tell me the odds.`,
+    compromise:(p1,p2)=>`Second choice wins. Could be worse. I've seen worse.`,
+    chaos:(p1,p2)=>`${p1} and ${p2} picked completely different things. I had a bad feeling about this.`,
+    dominos:"Domino's. I've made the Kessel Run in less than twelve parsecs and THIS is what we're doing.",
+    tritip:"Smoked tri-tip. Someone actually planned ahead. Respect.",
+    roscoes_weekday:"Roscoe's. Tuesday. I have a bad feeling about this.",
+    thumbsUp:"Good call. Sometimes things work out.",
+    thumbsDown:"Had a bad feeling about that place from the start. Next time, trust me.",
   },
-  sam: {
-    splash: "Listen up. It's dinner time. And I am TIRED of this indecisive situation every single night. Let's FIX THIS.",
-    vibe: "FIRST. How is everyone feeling? And be HONEST. I will know if you're lying.",
-    spin_weekday: "It's a WEEKNIGHT. Keep. It. Simple. We are not doing anything fancy on a Tuesday.",
-    spin_weekend: "It's the WEEKEND. We have OPTIONS. Do NOT waste this.",
-    spin_home: "Staying home. FINE. The fridge better deliver.",
-    perfect: "You two AGREED?! On the SAME thing?! I have been waiting for this moment. FINALLY.",
-    compromise: "Second choice takes it. Nobody's jumping for joy but NOBODY IS COMPLAINING EITHER.",
-    chaos: "You picked WHAT and she picked WHAT? This is EXACTLY why I don't do group decisions.",
-    dominos: "Domino's. On a FRIDAY. I am too old for this. You better enjoy every SINGLE slice.",
-    triTip: "Smoked tri-tip. NOW we're talking. SOMEBODY in this house has their priorities STRAIGHT.",
-    roscoes_weekday: "Roscoe's. On a TUESDAY. I RESPECT the hustle but somebody better have the ENERGY for this.",
-    thumbsUp: "THAT'S what I'm talking about. Good call. FINALLY.",
-    thumbsDown: "I KNEW it. I had a feeling. We are NEVER going back there.",
+  sam:{
+    splash:"Listen up. It's dinner time. And I am TIRED of this indecisive situation every single night. Let's FIX THIS.",
+    vibe:"FIRST. How is everyone feeling? And be HONEST. I will know if you're lying.",
+    spin_out_weekday:"It's a WEEKNIGHT. Keep. It. Simple. Nothing fancy on a Tuesday.",
+    spin_out_weekend:"It's the WEEKEND. We have OPTIONS. Do NOT waste this.",
+    spin_in:"Staying home. FINE. The fridge better deliver.",
+    perfect:(p1,p2)=>`${p1} and ${p2} AGREED?! On the SAME thing?! I have been waiting for this moment. FINALLY.`,
+    compromise:(p1,p2)=>`Second choice takes it. Nobody's jumping for joy but NOBODY IS COMPLAINING EITHER.`,
+    chaos:(p1,p2)=>`${p1} picked WHAT and ${p2} picked WHAT? This is EXACTLY why I don't do group decisions.`,
+    dominos:"Domino's. On a FRIDAY. I am too old for this. You better enjoy every SINGLE slice.",
+    tritip:"Smoked tri-tip. NOW we're talking. SOMEBODY in this house has their priorities STRAIGHT.",
+    roscoes_weekday:"Roscoe's. On a TUESDAY. I RESPECT the hustle but somebody better have the ENERGY for this.",
+    thumbsUp:"THAT'S what I'm talking about. Good call. FINALLY.",
+    thumbsDown:"I KNEW it. I had a feeling. We are NEVER going back there.",
   },
 };
 
-// ─── CUISINE DATA ─────────────────────────────────────────────────────────
-const CUISINES = {
-  out: [
-    { id: 'mexican',    name: 'Mexican',      emoji: '🌮', weekendOnly: false, places: ['El Torito Loco', 'Chipotle', 'Luchador'] },
-    { id: 'fastfood',   name: 'Fast Food',    emoji: '🍔', weekendOnly: false, places: ['In-N-Out', 'The Habit', 'Arby\'s'] },
-    { id: 'chicken',    name: 'Chicken',      emoji: '🍗', weekendOnly: false, places: ['El Pollo Loco', 'Panda Express'] },
-    { id: 'subs',       name: 'Subs',         emoji: '🥖', weekendOnly: false, places: ['Jersey Mike\'s'] },
-    { id: 'pizza',      name: 'Pizza',        emoji: '🍕', weekendOnly: false, places: ['Domino\'s'] },
-    { id: 'soulfood',   name: 'Soul Food',    emoji: '🧇', weekendOnly: true,  places: ['Roscoe\'s'] },
-    { id: 'burgers',    name: 'Burgers',      emoji: '🍔', weekendOnly: false, places: ['The Stand'] },
-    { id: 'seafood',    name: 'Seafood',      emoji: '🐟', weekendOnly: true,  places: ['Urban Fish'] },
-    { id: 'american',   name: 'American',     emoji: '🥩', weekendOnly: false, places: ['Chili\'s'] },
-    { id: 'healthy',    name: 'Fresh/Salad',  emoji: '🥗', weekendOnly: false, places: ['Soup & Fresh'] },
-  ],
-  in: [
-    { id: 'tacos_home', name: 'Tacos/Burritos', emoji: '🌯', weekendOnly: false, places: ['Home'] },
-    { id: 'pizza_home', name: 'DiGiorno',        emoji: '🍕', weekendOnly: false, places: ['Home'] },
-    { id: 'frenchbread',name: 'French Bread Pizza', emoji: '🍕', weekendOnly: false, places: ['Costco Freezer'] },
-    { id: 'grillcheese',name: 'Grilled Cheese',  emoji: '🧀', weekendOnly: false, places: ['Home'] },
-    { id: 'burgers_home',name: 'Burgers',         emoji: '🍔', weekendOnly: false, places: ['Grill'] },
-    { id: 'hotdogs',    name: 'Hot Dogs',         emoji: '🌭', weekendOnly: false, places: ['Grill'] },
-    { id: 'steaks',     name: 'Steaks',           emoji: '🥩', weekendOnly: true,  places: ['Grill'] },
-    { id: 'tritip',     name: 'Smoked Tri-Tip',  emoji: '🔥', weekendOnly: true,  places: ['Smoker'] },
-    { id: 'crockpot',   name: 'Crockpot',         emoji: '🥘', weekendOnly: false, places: ['Home'], winterOnly: true },
-  ],
-};
+// ─── DEFAULT FOOD ─────────────────────────────────────────────────────────
+const DEFAULT_FOOD=[
+  {id:'f1',name:'Mexican',emoji:'🌮',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f2',name:'In-N-Out',emoji:'🍔',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f3',name:'The Habit',emoji:'🍔',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f4',name:"Arby's",emoji:'🥪',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f5',name:'El Pollo Loco',emoji:'🍗',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f6',name:'Chipotle',emoji:'🌯',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f7',name:"Jersey Mike's",emoji:'🥖',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f8',name:'Panda Express',emoji:'🥡',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f9',name:"Domino's",emoji:'🍕',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f10',name:"Roscoe's",emoji:'🧇',bucket:'out',weekendOnly:true,winterOnly:false},
+  {id:'f11',name:'The Stand',emoji:'🍔',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f12',name:'Urban Fish',emoji:'🐟',bucket:'out',weekendOnly:true,winterOnly:false},
+  {id:'f13',name:"Chili's",emoji:'🥩',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f14',name:'Soup & Fresh',emoji:'🥗',bucket:'out',weekendOnly:false,winterOnly:false},
+  {id:'f15',name:'El Torito Loco',emoji:'🌮',bucket:'out',weekendOnly:true,winterOnly:false},
+  {id:'f16',name:'Luchador',emoji:'🌮',bucket:'out',weekendOnly:true,winterOnly:false},
+  {id:'f17',name:'Tacos/Burritos',emoji:'🌯',bucket:'in',weekendOnly:false,winterOnly:false},
+  {id:'f18',name:'DiGiorno',emoji:'🍕',bucket:'in',weekendOnly:false,winterOnly:false},
+  {id:'f19',name:'French Bread Pizza',emoji:'🍕',bucket:'in',weekendOnly:false,winterOnly:false},
+  {id:'f20',name:'Grilled Cheese',emoji:'🧀',bucket:'in',weekendOnly:false,winterOnly:false},
+  {id:'f21',name:'Burgers',emoji:'🍔',bucket:'in',weekendOnly:false,winterOnly:false},
+  {id:'f22',name:'Hot Dogs',emoji:'🌭',bucket:'in',weekendOnly:false,winterOnly:false},
+  {id:'f23',name:'Steaks',emoji:'🥩',bucket:'in',weekendOnly:true,winterOnly:false},
+  {id:'f24',name:'Smoked Tri-Tip',emoji:'🔥',bucket:'in',weekendOnly:true,winterOnly:false},
+  {id:'f25',name:'Crockpot',emoji:'🥘',bucket:'in',weekendOnly:false,winterOnly:true},
+];
 
-const FOOD_CODES = ['TACO','BEEF','RICE','NOOD','CHIX','FISH','GRIL','SALSA','BRGR','BITE','FORK','EATZ'];
+const FOOD_CODES=['TACO','BEEF','RICE','NOOD','CHIX','FISH','GRIL','BRGR','BITE','FORK','EATZ','SALS'];
 
-// ─── STATE ────────────────────────────────────────────────────────────────
-let currentPlayer = null;
-let sessionCode = null;
-let myEnergy = null;
-let myGoOut = null;
-let myFirst = null;
-let mySecond = null;
-let pollInterval = null;
-let history = JSON.parse(localStorage.getItem('forkit_history') || '[]');
+// ─── SETTINGS ─────────────────────────────────────────────────────────────
+function loadSettings(){
+  try{ return JSON.parse(localStorage.getItem('forkit_settings')||'null'); }catch(e){}
+  return null;
+}
+function defaultSettings(){
+  return {
+    p1Avatar:'🧔', p1Alias:'Chris',
+    p2Avatar:'👸', p2Alias:'Diana',
+    pickCount:2,
+    hostOverride:'auto',
+    hostQueue:[],
+    food: DEFAULT_FOOD.map(f=>({...f})),
+  };
+}
+function saveSettings(){
+  localStorage.setItem('forkit_settings', JSON.stringify(cfg));
+}
 
-function getHost() {
-  const month = new Date().getMonth() + 1;
-  return HOSTS[month];
+let cfg = loadSettings() || defaultSettings();
+let history = JSON.parse(localStorage.getItem('forkit_history')||'[]');
+
+// ─── HOST SELECTION ───────────────────────────────────────────────────────
+function getActiveHost(){
+  if(cfg.hostOverride && cfg.hostOverride !== 'auto'){
+    return ALL_HOSTS.find(h=>h.id===cfg.hostOverride) || ALL_HOSTS[0];
+  }
+  // No-repeat queue rotation
+  if(!cfg.hostQueue || cfg.hostQueue.length===0){
+    cfg.hostQueue = shuffle([...ALL_HOSTS.map(h=>h.id)]);
+  }
+  const nextId = cfg.hostQueue[0];
+  return ALL_HOSTS.find(h=>h.id===nextId) || ALL_HOSTS[0];
 }
-function getHostLines() {
-  return HOST_LINES[getHost().vibe];
+function advanceHost(){
+  if(cfg.hostOverride && cfg.hostOverride !== 'auto') return;
+  if(cfg.hostQueue && cfg.hostQueue.length > 0){
+    cfg.hostQueue.shift();
+    if(cfg.hostQueue.length===0) cfg.hostQueue=shuffle([...ALL_HOSTS.map(h=>h.id)]);
+    saveSettings();
+  }
 }
-function isWeekend() {
-  const d = new Date().getDay();
-  return d === 0 || d === 6;
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
 }
-function isWinter() {
-  const m = new Date().getMonth() + 1;
-  return m === 12 || m === 1 || m === 2;
+
+// ─── SESSION STATE ────────────────────────────────────────────────────────
+let currentPlayer=null, sessionCode=null;
+let myEnergy=null, myGoOut=null;
+let myPicks=[];
+let pollInterval=null;
+let activeHost=null;
+let newFoodFlags={weekend:false,winter:false};
+
+// ─── LONG PRESS (SECRET ADMIN) ────────────────────────────────────────────
+let longPressTimer=null;
+function startLongPress(){
+  longPressTimer=setTimeout(()=>{
+    showScreen('admin');
+    initAdmin();
+    showSecretHint();
+  },1200);
+}
+function cancelLongPress(){ clearTimeout(longPressTimer); }
+function showSecretHint(){
+  const h=document.createElement('div');
+  h.className='secret-hint';
+  h.textContent='🔓 Admin unlocked';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),3000);
 }
 
 // ─── ENCRYPTION ───────────────────────────────────────────────────────────
-async function deriveKey(code) {
-  const enc = new TextEncoder();
-  const keyMat = await crypto.subtle.importKey('raw', enc.encode(code.padEnd(16,'X')), 'PBKDF2', false, ['deriveKey']);
-  return crypto.subtle.deriveKey(
-    { name: 'PBKDF2', salt: enc.encode('forkit_salt'), iterations: 100000, hash: 'SHA-256' },
-    keyMat, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']
-  );
+async function deriveKey(code){
+  const enc=new TextEncoder();
+  const km=await crypto.subtle.importKey('raw',enc.encode(code.padEnd(16,'X')),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt:enc.encode('forkit_salt_v2'),iterations:100000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);
 }
-async function encrypt(data, code) {
-  const key = await deriveKey(code);
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const enc = new TextEncoder();
-  const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(JSON.stringify(data)));
-  const buf = new Uint8Array(iv.byteLength + ct.byteLength);
-  buf.set(iv, 0); buf.set(new Uint8Array(ct), iv.byteLength);
+async function encrypt(data,code){
+  const key=await deriveKey(code);
+  const iv=crypto.getRandomValues(new Uint8Array(12));
+  const enc=new TextEncoder();
+  const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,enc.encode(JSON.stringify(data)));
+  const buf=new Uint8Array(iv.byteLength+ct.byteLength);
+  buf.set(iv,0);buf.set(new Uint8Array(ct),iv.byteLength);
   return btoa(String.fromCharCode(...buf));
 }
-async function decrypt(b64, code) {
-  const key = await deriveKey(code);
-  const buf = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-  const iv = buf.slice(0, 12);
-  const ct = buf.slice(12);
-  const dec = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ct);
+async function decrypt(b64,code){
+  const key=await deriveKey(code);
+  const buf=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+  const iv=buf.slice(0,12),ct=buf.slice(12);
+  const dec=await crypto.subtle.decrypt({name:'AES-GCM',iv},key,ct);
   return JSON.parse(new TextDecoder().decode(dec));
 }
 
-// ─── SUPABASE ─────────────────────────────────────────────────────────────
-async function dbGet(code) {
-  const r = await fetch(`${SUPABASE_URL}/rest/v1/sessions?session_code=eq.${code}&select=*`, {
-    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
-  });
-  const rows = await r.json();
-  return rows[0] || null;
+// ─── SUPABASE OPS ─────────────────────────────────────────────────────────
+const SB_HEADERS={apikey:SB_KEY,Authorization:`Bearer ${SB_KEY}`,'Content-Type':'application/json'};
+async function dbGet(code){
+  const r=await fetch(`${SB_URL}/rest/v1/sessions?session_code=eq.${code}&select=*`,{headers:SB_HEADERS});
+  const rows=await r.json();return rows[0]||null;
 }
-async function dbCreate(code) {
-  const exp = new Date(Date.now() + 24 * 3600000).toISOString();
-  await fetch(`${SUPABASE_URL}/rest/v1/sessions`, {
-    method: 'POST',
-    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-    body: JSON.stringify({ session_code: code, status: 'pending', expires_at: exp })
-  });
+async function dbCreate(code){
+  const exp=new Date(Date.now()+24*3600000).toISOString();
+  await fetch(`${SB_URL}/rest/v1/sessions`,{method:'POST',headers:{...SB_HEADERS,Prefer:'return=minimal'},body:JSON.stringify({session_code:code,status:'pending',expires_at:exp})});
 }
-async function dbUpdate(code, fields) {
-  await fetch(`${SUPABASE_URL}/rest/v1/sessions?session_code=eq.${code}`, {
-    method: 'PATCH',
-    headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-    body: JSON.stringify(fields)
-  });
+async function dbUpdate(code,fields){
+  await fetch(`${SB_URL}/rest/v1/sessions?session_code=eq.${code}`,{method:'PATCH',headers:{...SB_HEADERS,Prefer:'return=minimal'},body:JSON.stringify(fields)});
 }
 
 // ─── SCREENS ──────────────────────────────────────────────────────────────
-function showScreen(name) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + name).classList.add('active');
-  if (name === 'history') renderHistory();
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  if(name==='history') renderHistory();
+  if(name==='splash') initSplash();
 }
 
-// ─── SPLASH INIT ──────────────────────────────────────────────────────────
-function initSplash() {
-  const host = getHost();
-  const lines = getHostLines();
-  const months = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
-  const m = new Date().getMonth() + 1;
-  document.getElementById('host-avatar').textContent = host.avatar;
-  document.getElementById('host-name').textContent = 'Your host: ' + host.name;
-  document.getElementById('host-quote').textContent = '"' + lines.splash + '"';
-  document.getElementById('host-month').textContent = 'Hosting through ' + months[m];
-  document.getElementById('setup-host-line').textContent = host.avatar + ' ' + host.name + ' is your host tonight';
+// ─── SPLASH ───────────────────────────────────────────────────────────────
+function initSplash(){
+  activeHost=getActiveHost();
+  const lines=HOST_LINES[activeHost.id];
+  document.getElementById('host-avatar').textContent=activeHost.avatar;
+  document.getElementById('host-name').textContent='Your host: '+activeHost.name;
+  document.getElementById('host-quote').textContent='"'+lines.splash+'"';
+  document.getElementById('host-session').textContent=cfg.hostOverride==='auto'?'Auto-rotating hosts':'Manually selected host';
+  // Setup screen player buttons
+  document.getElementById('p1-avatar-btn').textContent=cfg.p1Avatar||'🧔';
+  document.getElementById('p1-name-btn').textContent=cfg.p1Alias||'Player 1';
+  document.getElementById('p2-avatar-btn').textContent=cfg.p2Avatar||'👸';
+  document.getElementById('p2-name-btn').textContent=cfg.p2Alias||'Player 2';
+  document.getElementById('setup-host-line').textContent=activeHost.avatar+' '+activeHost.name+' is your host tonight';
 }
 
 // ─── SETUP ────────────────────────────────────────────────────────────────
-function selectPlayer(n) {
-  currentPlayer = n;
-  document.getElementById('p1btn').classList.toggle('selected', n === 1);
-  document.getElementById('p2btn').classList.toggle('selected', n === 2);
-  document.getElementById('p1-section').style.display = n === 1 ? 'block' : 'none';
-  document.getElementById('p2-section').style.display = n === 2 ? 'block' : 'none';
-  if (n === 1) {
-    const code = FOOD_CODES[Math.floor(Math.random() * FOOD_CODES.length)];
-    sessionCode = code;
-    document.getElementById('generated-code').textContent = code;
+function selectPlayer(n){
+  currentPlayer=n;
+  document.getElementById('p1btn').classList.toggle('selected',n===1);
+  document.getElementById('p2btn').classList.toggle('selected',n===2);
+  document.getElementById('p1-section').style.display=n===1?'block':'none';
+  document.getElementById('p2-section').style.display=n===2?'block':'none';
+  if(n===1){
+    sessionCode=FOOD_CODES[Math.floor(Math.random()*FOOD_CODES.length)];
+    document.getElementById('generated-code').textContent=sessionCode;
   }
 }
-
-async function startAsP1() {
-  try {
+async function startAsP1(){
+  try{
     await dbCreate(sessionCode);
+    advanceHost();
     showScreen('vibe');
     initVibe();
-  } catch(e) {
-    showToast('Connection error — check your internet');
+  }catch(e){ showToast('Connection error — check internet'); }
+}
+async function joinAsP2(){
+  const code=document.getElementById('code-input').value.trim().toUpperCase();
+  if(code.length<3){showToast('Enter the session code');return;}
+  sessionCode=code;
+  try{
+    const row=await dbGet(code);
+    if(!row){showToast('Session not found — check the code');return;}
+    showScreen('vibe');
+    initVibe();
+  }catch(e){showToast('Connection error');}
+}
+
+// ─── VIBE ─────────────────────────────────────────────────────────────────
+function initVibe(){
+  myEnergy=null;myGoOut=null;
+  const lines=HOST_LINES[activeHost.id];
+  document.getElementById('vibe-host-line').textContent='"'+lines.vibe+'"';
+  document.getElementById('vibe-next-btn').disabled=true;
+  document.querySelectorAll('.vibe-btn').forEach(b=>b.classList.remove('selected'));
+}
+function selectVibe(type,val,el){
+  if(type==='energy'){
+    myEnergy=val;
+    document.querySelectorAll('#energy-grid .vibe-btn').forEach(b=>b.classList.remove('selected'));
+  } else {
+    myGoOut=val;
+    document.querySelectorAll('#goout-grid .vibe-btn').forEach(b=>b.classList.remove('selected'));
   }
+  el.classList.add('selected');
+  document.getElementById('vibe-next-btn').disabled=!(myEnergy&&myGoOut);
 }
-
-async function joinAsP2() {
-  const code = document.getElementById('code-input').value.trim().toUpperCase();
-  if (code.length < 3) { showToast('Enter the session code'); return; }
-  sessionCode = code;
-  const row = await dbGet(code);
-  if (!row) { showToast('Session not found — check the code'); return; }
-  showScreen('vibe');
-  initVibe();
-}
-
-// ─── VIBE CHECK ───────────────────────────────────────────────────────────
-function initVibe() {
-  document.getElementById('vibe-host-line').textContent = '"' + getHostLines().vibe + '"';
-  myEnergy = null; myGoOut = null;
-  document.getElementById('vibe-next-btn').disabled = true;
-  document.querySelectorAll('.vibe-btn').forEach(b => b.classList.remove('selected'));
-}
-
-function selectEnergy(val) {
-  myEnergy = val;
-  document.querySelectorAll('#energy-grid .vibe-btn').forEach(b => b.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
-  checkVibeReady();
-}
-
-function selectGoOut(val) {
-  myGoOut = val;
-  document.querySelectorAll('#goout-grid .vibe-btn').forEach(b => b.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
-  checkVibeReady();
-}
-
-function checkVibeReady() {
-  document.getElementById('vibe-next-btn').disabled = !(myEnergy && myGoOut);
-}
-
-async function submitVibe() {
-  showScreen('spin');
-  initSpin();
-}
+function submitVibe(){ showScreen('spin'); initSpin(); }
 
 // ─── SPIN ─────────────────────────────────────────────────────────────────
-function initSpin() {
-  const lines = getHostLines();
-  const weekend = isWeekend();
-  const goOut = myGoOut === 'out';
-  const exhausted = myEnergy === 'dead' || myEnergy === 'low';
+function initSpin(){
+  myPicks=[];
+  const lines=HOST_LINES[activeHost.id];
+  const goOut=myGoOut==='out';
+  const weekend=isWeekend();
+  const hostLine=goOut?(weekend?lines.spin_out_weekend:lines.spin_out_weekday):lines.spin_in;
+  document.getElementById('spin-host-line').textContent='"'+hostLine+'"';
+  document.getElementById('spin-title').textContent=goOut?'Pick Your Eats':'Pick Your Home Meal';
 
-  let hostLine = goOut
-    ? (weekend ? lines.spin_weekend : lines.spin_weekday)
-    : lines.spin_home;
-  document.getElementById('spin-host-line').textContent = '"' + hostLine + '"';
-  document.getElementById('spin-title').textContent = goOut ? 'Pick Your Cuisine' : 'Pick Your Home Meal';
-
-  let pool = goOut ? CUISINES.out : CUISINES.in;
-
-  // Filter weekend-only if weekday
-  if (!weekend) pool = pool.filter(c => !c.weekendOnly);
-  // Filter winter-only if not winter
-  if (!isWinter()) pool = pool.filter(c => !c.winterOnly);
-  // If exhausted and going out, favor fast/easy (suppress weekend-only anyway)
-  // Just show all eligible options and let them pick
-
-  myFirst = null; mySecond = null;
-  document.getElementById('spin-next-btn').disabled = true;
-
-  const grid = document.getElementById('cuisine-grid');
-  grid.innerHTML = pool.map(c => `
-    <div class="cuisine-card" id="card-${c.id}" onclick="pickCuisine('${c.id}')">
-      <div class="cuisine-emoji">${c.emoji}</div>
-      <div class="cuisine-name">${c.name}</div>
-    </div>
-  `).join('');
-}
-
-function pickCuisine(id) {
-  if (myFirst === id) {
-    myFirst = null;
-    document.getElementById('card-' + id).classList.remove('first');
-    document.getElementById('card-' + id).querySelector('.pick-badge')?.remove();
-  } else if (mySecond === id) {
-    mySecond = null;
-    document.getElementById('card-' + id).classList.remove('second');
-    document.getElementById('card-' + id).querySelector('.pick-badge')?.remove();
-  } else if (!myFirst) {
-    myFirst = id;
-    const card = document.getElementById('card-' + id);
-    card.classList.add('first');
-    card.insertAdjacentHTML('beforeend', '<div class="pick-badge first">1</div>');
-  } else if (!mySecond && id !== myFirst) {
-    mySecond = id;
-    const card = document.getElementById('card-' + id);
-    card.classList.add('second');
-    card.insertAdjacentHTML('beforeend', '<div class="pick-badge second">2</div>');
+  // Build legend
+  const pickColors=['var(--gold)','var(--purple)','var(--teal)'];
+  const pickLabels=['1st choice','2nd choice','3rd choice'];
+  const legend=document.getElementById('pick-legend');
+  legend.innerHTML='';
+  for(let i=0;i<cfg.pickCount;i++){
+    legend.innerHTML+=`<div class="legend-item"><div class="legend-dot" style="background:${pickColors[i]}"></div>${pickLabels[i]}</div>`;
   }
-  document.getElementById('spin-next-btn').disabled = !(myFirst && mySecond);
+
+  // Filter food
+  let pool=cfg.food.filter(f=>f.bucket===(goOut?'out':'in'));
+  if(!weekend) pool=pool.filter(f=>!f.weekendOnly);
+  if(!isWinter()) pool=pool.filter(f=>!f.winterOnly);
+
+  document.getElementById('spin-next-btn').disabled=true;
+  const grid=document.getElementById('cuisine-grid');
+  grid.innerHTML=pool.map(f=>`
+    <div class="cuisine-card" id="card-${f.id}" onclick="pickFood('${f.id}')">
+      <div class="cuisine-emoji">${f.emoji}</div>
+      <div class="cuisine-name">${f.name}</div>
+    </div>`).join('');
 }
 
-async function submitSpin() {
-  const myData = { energy: myEnergy, goOut: myGoOut, first: myFirst, second: mySecond, ts: Date.now() };
-  try {
-    const encrypted = await encrypt(myData, sessionCode);
-    const field = currentPlayer === 1 ? 'player1_data' : 'player2_data';
-    await dbUpdate(sessionCode, { [field]: encrypted });
+function pickFood(id){
+  const pickClasses=['pick1','pick2','pick3'];
+  const badgeClasses=['b1','b2','b3'];
+  const card=document.getElementById('card-'+id);
+  const existingIdx=myPicks.indexOf(id);
+  if(existingIdx!==-1){
+    // Deselect — remove this pick and re-render badges
+    myPicks.splice(existingIdx,1);
+    // Re-render all cards
+    document.querySelectorAll('.cuisine-card').forEach(c=>{
+      c.className='cuisine-card';
+      const badge=c.querySelector('.pick-badge');
+      if(badge) badge.remove();
+    });
+    myPicks.forEach((pid,i)=>{
+      const c=document.getElementById('card-'+pid);
+      if(c){
+        c.classList.add(pickClasses[i]);
+        c.insertAdjacentHTML('beforeend',`<div class="pick-badge ${badgeClasses[i]}">${i+1}</div>`);
+      }
+    });
+  } else if(myPicks.length<cfg.pickCount){
+    myPicks.push(id);
+    const i=myPicks.length-1;
+    card.classList.add(pickClasses[i]);
+    card.insertAdjacentHTML('beforeend',`<div class="pick-badge ${badgeClasses[i]}">${i+1}</div>`);
+  }
+  document.getElementById('spin-next-btn').disabled=myPicks.length<cfg.pickCount;
+}
+
+async function submitSpin(){
+  const myData={energy:myEnergy,goOut:myGoOut,picks:myPicks,ts:Date.now()};
+  try{
+    const encrypted=await encrypt(myData,sessionCode);
+    const field=currentPlayer===1?'player1_data':'player2_data';
+    await dbUpdate(sessionCode,{[field]:encrypted});
     showScreen('waiting');
-    document.getElementById('waiting-code-display').textContent = sessionCode;
+    document.getElementById('waiting-code-display').textContent=sessionCode;
+    const alias=currentPlayer===1?(cfg.p1Alias||'Player 1'):(cfg.p2Alias||'Player 2');
+    const otherAlias=currentPlayer===1?(cfg.p2Alias||'Player 2'):(cfg.p1Alias||'Player 1');
+    document.getElementById('waiting-sub').textContent=`${alias}'s picks are saved and encrypted.\nWaiting for ${otherAlias}...`;
     startPolling();
-  } catch(e) {
-    showToast('Error saving picks — check internet');
-  }
+  }catch(e){ showToast('Error saving picks'); }
 }
 
-// ─── WAITING & POLLING ────────────────────────────────────────────────────
-function startPolling() {
-  if (pollInterval) clearInterval(pollInterval);
-  pollInterval = setInterval(checkBothSubmitted, 4000);
-}
-
-async function checkBothSubmitted() {
-  try {
-    const row = await dbGet(sessionCode);
-    if (row && row.player1_data && row.player2_data) {
-      clearInterval(pollInterval);
-      document.getElementById('waiting-spinner').style.display = 'none';
-      document.getElementById('waiting-sub').textContent = 'Both players are in! Ready to reveal!';
-      document.getElementById('reveal-now-btn').style.display = 'block';
-    }
-  } catch(e) {}
+// ─── POLLING ──────────────────────────────────────────────────────────────
+function startPolling(){
+  if(pollInterval) clearInterval(pollInterval);
+  pollInterval=setInterval(async()=>{
+    try{
+      const row=await dbGet(sessionCode);
+      if(row&&row.player1_data&&row.player2_data){
+        clearInterval(pollInterval);
+        document.getElementById('waiting-spinner').style.display='none';
+        document.getElementById('waiting-sub').textContent='Both players are in! Ready to reveal! 🎬';
+        document.getElementById('reveal-now-btn').style.display='block';
+      }
+    }catch(e){}
+  },4000);
 }
 
 // ─── REVEAL ───────────────────────────────────────────────────────────────
-async function showReveal() {
+async function showReveal(){
   showScreen('reveal');
-  document.getElementById('reveal-countdown-div').style.display = 'block';
-  document.getElementById('reveal-result-div').style.display = 'none';
-
-  // Countdown
-  for (let i = 3; i >= 1; i--) {
-    document.getElementById('countdown-num').textContent = i;
+  document.getElementById('reveal-countdown-div').style.display='block';
+  document.getElementById('reveal-result-div').style.display='none';
+  for(let i=3;i>=1;i--){
+    document.getElementById('countdown-num').textContent=i;
     await sleep(900);
   }
-  document.getElementById('countdown-num').textContent = '🍴';
+  document.getElementById('countdown-num').textContent='🍴';
   await sleep(600);
-  document.getElementById('reveal-countdown-div').style.display = 'none';
-
-  // Decrypt both
-  try {
-    const row = await dbGet(sessionCode);
-    const p1 = await decrypt(row.player1_data, sessionCode);
-    const p2 = await decrypt(row.player2_data, sessionCode);
-    processReveal(p1, p2);
-  } catch(e) {
+  document.getElementById('reveal-countdown-div').style.display='none';
+  try{
+    const row=await dbGet(sessionCode);
+    const p1=await decrypt(row.player1_data,sessionCode);
+    const p2=await decrypt(row.player2_data,sessionCode);
+    processReveal(p1,p2);
+  }catch(e){
     showToast('Could not decrypt — wrong session code?');
     showScreen('splash');
   }
 }
 
-function processReveal(p1, p2) {
-  const allCuisines = [...CUISINES.out, ...CUISINES.in];
-  const getName = id => allCuisines.find(c => c.id === id)?.name || id;
-  const getEmoji = id => allCuisines.find(c => c.id === id)?.emoji || '🍽️';
+function processReveal(p1,p2){
+  const p1Alias=cfg.p1Alias||'Player 1';
+  const p2Alias=cfg.p2Alias||'Player 2';
+  const p1Avatar=cfg.p1Avatar||'🧔';
+  const p2Avatar=cfg.p2Avatar||'👸';
+  const getFood=id=>cfg.food.find(f=>f.id===id)||{name:id,emoji:'🍽️'};
 
-  let winner = null;
-  let matchType = 'chaos';
-  let matchNote = '';
+  // Find winner using overlap from all picks, weighted toward earlier picks
+  const p1Picks=p1.picks||[];
+  const p2Picks=p2.picks||[];
 
-  if (p1.first === p2.first) {
-    winner = p1.first; matchType = 'perfect'; matchNote = 'Perfect match — both 1st choices!';
-  } else if (p1.first === p2.second) {
-    winner = p1.first; matchType = 'compromise'; matchNote = 'Your 1st, their 2nd — slight lean your way.';
-  } else if (p1.second === p2.first) {
-    winner = p1.second; matchType = 'compromise'; matchNote = 'Their 1st, your 2nd — slight lean their way.';
-  } else if (p1.second === p2.second) {
-    winner = p1.second; matchType = 'compromise'; matchNote = "Both 2nd choices — nobody's jumping but nobody's pouting either.";
-  } else {
-    // Chaos — flip between the two firsts
-    winner = Math.random() > 0.5 ? p1.first : p2.first;
-    matchType = 'chaos'; matchNote = 'Complete chaos. Fork It made the call.';
+  // Check ordered matches (1v1, 1v2, 1v3, 2v1, 2v2 etc)
+  let winner=null, matchType='chaos', matchNote='';
+  outer:for(let i=0;i<p1Picks.length;i++){
+    for(let j=0;j<p2Picks.length;j++){
+      if(p1Picks[i]===p2Picks[j]){
+        winner=p1Picks[i];
+        if(i===0&&j===0){matchType='perfect';matchNote='Perfect match — both first choices!';}
+        else if(i===0){matchType='compromise';matchNote=`${p1Alias}'s 1st, ${p2Alias}'s ${j+1}${ord(j+1)} — slight lean ${p1Alias}'s way.`;}
+        else if(j===0){matchType='compromise';matchNote=`${p2Alias}'s 1st, ${p1Alias}'s ${i+1}${ord(i+1)} — slight lean ${p2Alias}'s way.`;}
+        else{matchType='compromise';matchNote="Not perfect but not chaos either. The universe found a middle ground.";}
+        break outer;
+      }
+    }
   }
 
-  const winnerName = getName(winner);
-  const winnerEmoji = getEmoji(winner);
-  const lines = getHostLines();
+  // Chaos — Option B: pick from combined picks weighted toward firsts
+  if(!winner){
+    const all=[...p1Picks,...p2Picks];
+    const weighted=[...p1Picks,...p2Picks,p1Picks[0],p2Picks[0]].filter(Boolean);
+    winner=weighted[Math.floor(Math.random()*weighted.length)];
+    matchNote='Complete chaos. Fork It dug through your combined picks and made the call.';
+  }
 
-  // Pick host commentary
-  let hostComment = '';
-  if (winner === 'dominos' || winner === 'pizza_home') hostComment = lines.dominos;
-  else if (winner === 'tritip') hostComment = lines.triTip;
-  else if (winner === 'soulfood' && !isWeekend()) hostComment = lines.roscoes_weekday;
-  else if (matchType === 'perfect') hostComment = lines.perfect;
-  else if (matchType === 'compromise') hostComment = lines.compromise;
-  else hostComment = lines.chaos;
+  const winFood=getFood(winner);
+  const lines=HOST_LINES[activeHost.id];
+
+  // Host commentary
+  let hostComment='';
+  if(winner==='f9'||winner==='f18'||winner==='f19') hostComment=lines.dominos;
+  else if(winner==='f24') hostComment=lines.tritip;
+  else if(winner==='f10'&&!isWeekend()) hostComment=lines.roscoes_weekday;
+  else if(matchType==='perfect') hostComment=typeof lines.perfect==='function'?lines.perfect(p1Alias,p2Alias):lines.perfect;
+  else if(matchType==='compromise') hostComment=typeof lines.compromise==='function'?lines.compromise(p1Alias,p2Alias):lines.compromise;
+  else hostComment=typeof lines.chaos==='function'?lines.chaos(p1Alias,p2Alias):lines.chaos;
 
   // Badge
-  const badge = document.getElementById('match-type-badge');
-  badge.textContent = matchType === 'perfect' ? '🎯 Perfect Match' : matchType === 'compromise' ? '🤝 Compromise Win' : '🎲 Fork It Decided';
-  badge.className = 'match-type ' + matchType;
+  const badge=document.getElementById('match-badge');
+  badge.textContent=matchType==='perfect'?'🎯 Perfect Match':matchType==='compromise'?'🤝 Compromise Win':'🎲 Fork It Decided';
+  badge.className='match-badge '+matchType;
 
-  document.getElementById('reveal-trophy').textContent = winnerEmoji;
-  document.getElementById('reveal-winner-text').textContent = winnerName;
-  document.getElementById('reveal-restaurant-text').textContent = matchNote;
-  document.getElementById('reveal-host-line').textContent = '"' + hostComment + '"';
+  document.getElementById('reveal-trophy').textContent=winFood.emoji;
+  document.getElementById('reveal-winner').textContent=winFood.name;
+  document.getElementById('reveal-note').textContent=matchNote;
+  document.getElementById('reveal-host-line').textContent='"'+hostComment+'"';
 
   // Player cards
-  document.getElementById('reveal-cards').innerHTML = `
+  const pickList=(picks)=>picks.map((id,i)=>{
+    const f=getFood(id);
+    const colors=['var(--gold)','var(--purple)','var(--teal)'];
+    return `<div style="font-size:13px;color:${colors[i]};font-weight:${i===0?'700':'500'};margin-bottom:2px;">${i+1}. ${f.emoji} ${f.name}</div>`;
+  }).join('');
+
+  document.getElementById('reveal-cards').innerHTML=`
     <div class="reveal-card">
-      <div class="reveal-card-label">Player 1 picked</div>
-      <div class="reveal-card-first">${getEmoji(p1.first)} ${getName(p1.first)}</div>
-      <div class="reveal-card-second">2nd: ${getEmoji(p1.second)} ${getName(p1.second)}</div>
+      <div class="reveal-card-avatar">${p1Avatar}</div>
+      <div class="reveal-card-alias">${p1Alias}</div>
+      ${pickList(p1Picks)}
     </div>
     <div class="reveal-card">
-      <div class="reveal-card-label">Player 2 picked</div>
-      <div class="reveal-card-first">${getEmoji(p2.first)} ${getName(p2.first)}</div>
-      <div class="reveal-card-second">2nd: ${getEmoji(p2.second)} ${getName(p2.second)}</div>
-    </div>
-  `;
+      <div class="reveal-card-avatar">${p2Avatar}</div>
+      <div class="reveal-card-alias">${p2Alias}</div>
+      ${pickList(p2Picks)}
+    </div>`;
 
-  document.getElementById('reveal-result-div').style.display = 'block';
+  document.getElementById('reveal-result-div').style.display='block';
+  if(matchType==='perfect') launchConfetti();
 
-  if (matchType === 'perfect') launchConfetti();
-
-  // Save to history locally
-  const entry = {
-    date: new Date().toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'}),
-    winner: winnerName,
-    winnerEmoji,
-    matchType,
-    p1First: getName(p1.first), p1Second: getName(p1.second),
-    p2First: getName(p2.first), p2Second: getName(p2.second),
-    rating: null,
-    host: getHost().name,
+  // Save history
+  const entry={
+    date:new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}),
+    winner:winFood.name, winnerEmoji:winFood.emoji,
+    matchType, p1Alias, p2Alias, p1Avatar, p2Avatar,
+    p1Picks:p1Picks.map(id=>getFood(id).name),
+    p2Picks:p2Picks.map(id=>getFood(id).name),
+    host:activeHost.name, rating:null,
   };
   history.unshift(entry);
-  localStorage.setItem('forkit_history', JSON.stringify(history.slice(0, 50)));
+  localStorage.setItem('forkit_history',JSON.stringify(history.slice(0,50)));
 }
 
-async function rate(val) {
-  const lines = getHostLines();
-  const comment = val === 'up' ? lines.thumbsUp : lines.thumbsDown;
-  if (history[0]) {
-    history[0].rating = val;
-    localStorage.setItem('forkit_history', JSON.stringify(history));
-  }
-  document.getElementById('rating-title').textContent = '"' + comment + '"';
-  document.querySelectorAll('.rating-btn').forEach(b => b.style.opacity = '0.4');
-}
+function ord(n){return n===1?'st':n===2?'nd':n===3?'rd':'th';}
 
-// ─── CONFETTI ─────────────────────────────────────────────────────────────
-function launchConfetti() {
-  const container = document.getElementById('confetti-container');
-  container.innerHTML = '';
-  const colors = ['#ffd700','#ff6b35','#51cf66','#a29bfe','#4ecdc4','#ff6b6b'];
-  for (let i = 0; i < 80; i++) {
-    const piece = document.createElement('div');
-    piece.className = 'confetti-piece';
-    piece.style.left = Math.random() * 100 + 'vw';
-    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-    piece.style.animationDuration = (2 + Math.random() * 3) + 's';
-    piece.style.animationDelay = Math.random() * 1.5 + 's';
-    piece.style.width = piece.style.height = (8 + Math.random() * 8) + 'px';
-    container.appendChild(piece);
-  }
-  setTimeout(() => container.innerHTML = '', 5000);
+async function rate(val){
+  const lines=HOST_LINES[activeHost.id];
+  const comment=val==='up'?lines.thumbsUp:lines.thumbsDown;
+  if(history[0]){history[0].rating=val;localStorage.setItem('forkit_history',JSON.stringify(history));}
+  document.getElementById('rating-title').textContent='"'+comment+'"';
+  document.querySelectorAll('.rating-btn').forEach(b=>b.style.opacity='0.4');
 }
 
 // ─── HISTORY ──────────────────────────────────────────────────────────────
-function renderHistory() {
-  const list = document.getElementById('history-list');
-  if (history.length === 0) {
-    list.innerHTML = '<div class="empty-state"><div class="empty-icon">🍽️</div>No decisions yet.<br>Start your first round!</div>';
-    return;
+function renderHistory(){
+  const list=document.getElementById('history-list');
+  if(!history.length){
+    list.innerHTML='<div class="empty-state"><div class="empty-icon">🍽️</div>No decisions yet.<br>Start your first round!</div>';return;
   }
-  list.innerHTML = history.map(e => `
+  list.innerHTML=history.map(e=>`
     <div class="history-card">
       <div class="history-top">
-        <div class="history-winner">${e.winnerEmoji} ${e.winner}</div>
-        <div class="history-rating">${e.rating === 'up' ? '👍' : e.rating === 'down' ? '👎' : '—'}</div>
+        <div class="history-winner">${e.winnerEmoji||'🍽️'} ${e.winner}</div>
+        <div class="history-rating">${e.rating==='up'?'👍':e.rating==='down'?'👎':'—'}</div>
       </div>
-      <div class="history-meta">${e.date} · ${e.matchType === 'perfect' ? '🎯 Perfect match' : e.matchType === 'compromise' ? '🤝 Compromise' : '🎲 Fork It decided'} · Host: ${e.host}</div>
+      <div class="history-meta">${e.date} · ${e.matchType==='perfect'?'🎯 Perfect':e.matchType==='compromise'?'🤝 Compromise':'🎲 Fork It'} · ${e.host||'Unknown host'}</div>
       <div class="history-picks">
-        <span class="history-badge">P1: ${e.p1First} / ${e.p1Second}</span>
-        <span class="history-badge">P2: ${e.p2First} / ${e.p2Second}</span>
+        <span class="history-badge">${e.p1Avatar||'🧔'} ${e.p1Alias||'P1'}: ${(e.p1Picks||[]).join(', ')}</span>
+        <span class="history-badge">${e.p2Avatar||'👸'} ${e.p2Alias||'P2'}: ${(e.p2Picks||[]).join(', ')}</span>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
+}
+
+// ─── ADMIN ────────────────────────────────────────────────────────────────
+function initAdmin(){
+  document.getElementById('p1-avatar').value=cfg.p1Avatar||'🧔';
+  document.getElementById('p1-alias').value=cfg.p1Alias||'Chris';
+  document.getElementById('p2-avatar').value=cfg.p2Avatar||'👸';
+  document.getElementById('p2-alias').value=cfg.p2Alias||'Diana';
+  selectPickCount(cfg.pickCount||2);
+  renderHostGrid();
+  renderFoodList();
+}
+
+function selectPickCount(n){
+  cfg.pickCount=n;
+  document.getElementById('pick2btn').classList.toggle('selected',n===2);
+  document.getElementById('pick3btn').classList.toggle('selected',n===3);
+}
+
+function renderHostGrid(){
+  const grid=document.getElementById('host-select-grid');
+  let html=`<div class="host-select-btn ${cfg.hostOverride==='auto'?'auto':''}" onclick="selectHostOverride('auto')">
+    <span class="host-emoji">🔀</span>Auto-rotate</div>`;
+  ALL_HOSTS.forEach(h=>{
+    html+=`<div class="host-select-btn ${cfg.hostOverride===h.id?'selected':''}" onclick="selectHostOverride('${h.id}')">
+      <span class="host-emoji">${h.avatar}</span>${h.name}</div>`;
+  });
+  grid.innerHTML=html;
+}
+
+function selectHostOverride(id){
+  cfg.hostOverride=id;
+  renderHostGrid();
+}
+
+function renderFoodList(){
+  const list=document.getElementById('food-list');
+  const bucketLabel=b=>b==='out'?'🚗 Eating Out':'🏠 Home';
+  list.innerHTML=cfg.food.map((f,i)=>`
+    <div class="food-item">
+      <div class="food-item-left">
+        <div class="food-item-emoji">${f.emoji}</div>
+        <div class="food-item-info">
+          <div class="food-item-name">${f.name}</div>
+          <div class="food-item-flags">${bucketLabel(f.bucket)}${f.weekendOnly?' · Weekend only':''}${f.winterOnly?' · Winter only':''}</div>
+        </div>
+      </div>
+      <button class="food-item-del" onclick="deleteFood(${i})">✕</button>
+    </div>`).join('');
+}
+
+function deleteFood(i){ cfg.food.splice(i,1); renderFoodList(); }
+
+function seedFoodDefaults(){
+  let added=0;
+  DEFAULT_FOOD.forEach(df=>{
+    const exists=cfg.food.some(f=>f.name===df.name&&f.bucket===df.bucket);
+    if(!exists){cfg.food.push({...df,id:'f'+Date.now()+Math.random()});added++;}
+  });
+  renderFoodList();
+  showToast(added>0?`✅ Added ${added} missing items`:'✅ Already up to date');
+}
+
+function showAddFood(){
+  newFoodFlags={weekend:false,winter:false};
+  document.getElementById('food-name-input').value='';
+  document.getElementById('food-emoji-input').value='';
+  document.getElementById('food-bucket-input').value='out';
+  document.getElementById('food-weekend-toggle').classList.remove('on');
+  document.getElementById('food-winter-toggle').classList.remove('on');
+  document.getElementById('food-modal').style.display='flex';
+}
+
+function toggleFoodFlag(type){
+  newFoodFlags[type]=!newFoodFlags[type];
+  document.getElementById('food-'+type+'-toggle').classList.toggle('on',newFoodFlags[type]);
+}
+
+function closeFoodModal(){ document.getElementById('food-modal').style.display='none'; }
+
+function confirmAddFood(){
+  const name=document.getElementById('food-name-input').value.trim();
+  const emoji=document.getElementById('food-emoji-input').value.trim()||'🍽️';
+  const bucket=document.getElementById('food-bucket-input').value;
+  if(!name){showToast('Enter a name');return;}
+  cfg.food.push({id:'f'+Date.now(),name,emoji,bucket,weekendOnly:newFoodFlags.weekend,winterOnly:newFoodFlags.winter});
+  closeFoodModal();
+  renderFoodList();
+}
+
+function saveAdmin(){
+  cfg.p1Avatar=document.getElementById('p1-avatar').value.trim()||'🧔';
+  cfg.p1Alias=document.getElementById('p1-alias').value.trim()||'Player 1';
+  cfg.p2Avatar=document.getElementById('p2-avatar').value.trim()||'👸';
+  cfg.p2Alias=document.getElementById('p2-alias').value.trim()||'Player 2';
+  saveSettings();
+  showToast('✅ Settings saved');
+  setTimeout(()=>{showScreen('splash');},800);
+}
+
+// ─── CONFETTI ─────────────────────────────────────────────────────────────
+function launchConfetti(){
+  const c=document.getElementById('confetti-container');
+  c.innerHTML='';
+  const colors=['#ffd700','#ff6b35','#51cf66','#a29bfe','#4ecdc4','#ff6b6b'];
+  for(let i=0;i<80;i++){
+    const p=document.createElement('div');
+    p.className='confetti-piece';
+    p.style.left=Math.random()*100+'vw';
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDuration=(2+Math.random()*3)+'s';
+    p.style.animationDelay=Math.random()*1.5+'s';
+    p.style.width=p.style.height=(8+Math.random()*8)+'px';
+    c.appendChild(p);
+  }
+  setTimeout(()=>c.innerHTML='',5000);
 }
 
 // ─── UTILS ────────────────────────────────────────────────────────────────
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-function showToast(msg) {
-  const t = document.createElement('div');
-  t.className = 'toast';
-  t.textContent = msg;
+function isWeekend(){const d=new Date().getDay();return d===0||d===6;}
+function isWinter(){const m=new Date().getMonth()+1;return m===12||m===1||m===2;}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+function showToast(msg){
+  const t=document.createElement('div');
+  t.className='toast';t.textContent=msg;
   document.body.appendChild(t);
-  setTimeout(() => t.remove(), 3000);
+  setTimeout(()=>t.remove(),3000);
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────
